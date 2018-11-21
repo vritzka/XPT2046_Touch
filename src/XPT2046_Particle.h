@@ -1,5 +1,5 @@
-#ifndef _XPT2046_Touchscreen_h_
-#define _XPT2046_Touchscreen_h_
+#ifndef _XPT2046_Particle_h_
+#define _XPT2046_Particle_h_
 
 #include "Particle.h"
 #include "SPI.h"

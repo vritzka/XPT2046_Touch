@@ -1,4 +1,4 @@
-#include "XPT2046_Touchscreen.h"
+#include "XPT2046_Particle.h"
 
 #define Z_THRESHOLD     400
 #define Z_THRESHOLD_INT	75
@@ -14,7 +14,7 @@ static int8_t tx_buffer[2];
 bool XPT2046_Touchscreen::begin()
 {
     //starting the SPI interface with the Photon as master, display as slaved. Slave select pin is A2 (default anyway)
-	SPI1.begin(SPI_MODE_MASTER);
+	SPI.begin(SPI_MODE_MASTER);
 	pinMode(csPin, OUTPUT);
 	digitalWrite(csPin, HIGH);
 	if (255 != tirqPin) {
@@ -82,8 +82,8 @@ int16_t XPT2046_Touchscreen::SPItransfer16(int8_t a,int8_t b)
 {
     int16_t c;
     
-    c = SPI1.transfer(b) << 8;
-    c |= SPI1.transfer(a);
+    c = SPI.transfer(b) << 8;
+    c |= SPI.transfer(a);
     
     return (c);
 }
@@ -110,10 +110,10 @@ void XPT2046_Touchscreen::update()
 	uint32_t now = millis();
 	if (now - msraw < MSEC_THRESHOLD) return;
 	
-	SPI1.beginTransaction(SPI_SETTING);
+	SPI.beginTransaction(SPI_SETTING);
 	digitalWrite(csPin, LOW);
 	
-	SPI1.transfer(0xB1 /* Z1 */);
+	SPI.transfer(0xB1 /* Z1 */);
 	int16_t z1 = XPT2046_Touchscreen::SPItransfer16(0xC1,0 /* Z2 */) >> 3;
 	int16_t z = z1 + 4095;
 	int16_t z2 = XPT2046_Touchscreen::SPItransfer16(0x91,0 /* X */) >> 3;
@@ -133,7 +133,7 @@ void XPT2046_Touchscreen::update()
 	//Serial.println("nul");
 	data[5] = XPT2046_Touchscreen::SPItransfer16(0,0) >> 3;
 	digitalWrite(csPin, HIGH);
-	SPI1.endTransaction();
+	SPI.endTransaction();
 	
 	//Serial.printf("z=%d  ::  z1=%d,  z2=%d  ", z, z1, z2);
 	if (z < 0) z = 0;
