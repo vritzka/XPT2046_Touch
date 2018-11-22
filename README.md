@@ -12,9 +12,9 @@ Connect the chip like this
 DO --- MISO A4  
 DI --- MOSI A5  
 CLK --- SCK A3  
-SS --  (you will chose CS this pin in the application)
+SS --  (you will chose this pin in the application)
 
-You could also use SPI1, the other SPI bus.
+The library can use SPI or SPI1.
 
 ```
 #include "XPT2046_touch.h"
