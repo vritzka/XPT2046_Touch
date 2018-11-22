@@ -7,46 +7,44 @@ Ported from Paul Stoffregen's Arduino version.
 
 ## Usage
 
-Connect XYZ hardware, add the XPT2046 library to your project and follow this simple example:
+Connect the chip like this
+
+DO --- MISO A4
+DI --- MOSI A5
+CLK --- SCK A3
+SS --  (you will chose CS this pin in the application)
+
+You could also use SPI1, the other SPI bus.
 
 ```
-#include "XPT2046.h"
-XPT2046 xPT2046;
+#include "XPT2046_touch.h"
+#define CS_PIN D5    //ChipSelect or SlaveSelect Pin
+#define TIRQ_PIN D1 // interrupt pin
+
+XPT2046_Touchscreen ts(SPI, CS_PIN, TIRQ_PIN);
 
 void setup() {
-  xPT2046.begin();
+  ts.begin();
+  ts.setRotation(3); 
+  
+  Serial.begin();
 }
 
 void loop() {
-  xPT2046.process();
+    if (ts.touched()) {
+      TS_Point p = ts.getPoint();
+      Serial.print("Pressure = ");
+      Serial.print(p.z);
+      Serial.print(", x = ");
+      Serial.print(p.x);
+      Serial.print(", y = ");
+      Serial.print(p.y);
+      delay(30);
+      Serial.println();
+ }
 }
 ```
 
 See the [examples](examples) folder for more details.
 
-## Documentation
-
-TODO: Describe `XPT2046`
-
-## Contributing
-
-Here's how you can make changes to this library and eventually contribute those changes back.
-
-To get started, [clone the library from GitHub to your local machine](https://help.github.com/articles/cloning-a-repository/).
-
-Change the name of the library in `library.properties` to something different. You can add your name at then end.
-
-Modify the sources in <src> and <examples> with the new behavior.
-
-To compile an example, use `particle compile examples/usage` command in [Particle CLI](https://docs.particle.io/guide/tools-and-features/cli#update-your-device-remotely) or use our [Desktop IDE](https://docs.particle.io/guide/tools-and-features/dev/#compiling-code).
-
-After your changes are done you can upload them with `particle library upload` or `Upload` command in the IDE. This will create a private (only visible by you) library that you can use in other projects. Do `particle library add XPT2046_myname` to add the library to a project on your machine or add the XPT2046_myname library to a project on the Web IDE or Desktop IDE.
-
-At this point, you can create a [GitHub pull request](https://help.github.com/articles/about-pull-requests/) with your changes to the original library. 
-
-If you wish to make your library public, use `particle library publish` or `Publish` command.
-
-## LICENSE
-Copyright 2018 Volker Ritzka
-
-Licensed under the <insert your choice of license here> license
+Licensed under the MIT license
