@@ -16,7 +16,7 @@
 
 
 XPT2046_Touchscreen ts(SPI, 320,240,CS_PIN);  // No interrupts
-//XPT2046_Touchscreen ts(SPI1, CS_PIN, TIRQ_PIN);  // Using SPI, interrupt enabled, polls only when disply is touched
+//XPT2046_Touchscreen ts(SPI, 320, 240, CS_PIN, TIRQ_PIN);  // Using SPI, interrupt enabled, polls only when disply is touched
 
 
 

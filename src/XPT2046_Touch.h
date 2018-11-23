@@ -23,8 +23,8 @@ public:
   	constexpr XPT2046_Touchscreen(SPIClass &spi, int displaywidth, int displayheight, uint8_t cspin) 
 	: xptSPI(spi), displayWidth(displaywidth), displayHeight(displayheight), csPin(cspin), tirqPin(255) { };
   
-	constexpr XPT2046_Touchscreen(SPIClass &spi, uint8_t cspin, uint8_t tirq) 
-	: xptSPI(spi), csPin(cspin), tirqPin(tirq) { };
+	constexpr XPT2046_Touchscreen(SPIClass &spi, int displaywidth, int displayheight, uint8_t cspin, uint8_t tirq) 
+	: xptSPI(spi), displayWidth(displaywidth), displayHeight(displayheight), csPin(cspin), tirqPin(tirq) { };
   
 	bool begin();
 	TS_Point getPoint();
