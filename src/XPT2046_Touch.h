@@ -14,10 +14,14 @@ public:
 };
 
 class XPT2046_Touchscreen {
+  
+  int displayWidth = 0;
+int displayHeight = 0;
+  
 public:
  
-  	constexpr XPT2046_Touchscreen(SPIClass &spi, uint8_t cspin) 
-	: xptSPI(spi), csPin(cspin), tirqPin(255) { };
+  	constexpr XPT2046_Touchscreen(SPIClass &spi, int displaywidth, int displayheight, uint8_t cspin) 
+	: xptSPI(spi), displayWidth(displaywidth), displayHeight(displayheight), csPin(cspin), tirqPin(255) { };
   
 	constexpr XPT2046_Touchscreen(SPIClass &spi, uint8_t cspin, uint8_t tirq) 
 	: xptSPI(spi), csPin(cspin), tirqPin(tirq) { };

@@ -1,10 +1,12 @@
 //this example will be helpful only if you connect the device to USB. 
 //That means you need to install the CLI first. The CLI will also install the USB driver: https://docs.particle.io/tutorials/developer-tools/cli/
 
+// define your screen dimensions
 #include "XPT2046_Touch.h"
 
-
 //TOUCH
+
+
 #define CS_PIN D5    //ChipSelect or SlaveSelect Pin
 #define TIRQ_PIN D1 // interrupt pin
 
@@ -13,8 +15,8 @@
 //Pins for SPI1: MOSI=D2, MISO=D3, SCK=D4
 
 
-//XPT2046_Touchscreen ts(SPI, CS_PIN);  // No interrupts
-XPT2046_Touchscreen ts(SPI, CS_PIN, TIRQ_PIN);  // Using SPI, interrupt enabled, polls only when disply is touched
+XPT2046_Touchscreen ts(SPI, 320,240,CS_PIN);  // No interrupts
+//XPT2046_Touchscreen ts(SPI1, CS_PIN, TIRQ_PIN);  // Using SPI, interrupt enabled, polls only when disply is touched
 
 
 
