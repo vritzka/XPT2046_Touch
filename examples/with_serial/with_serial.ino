@@ -33,7 +33,7 @@ void setup() {
 void loop(void) {
     
   if (ts.touched()) {
-    TS_Point p = ts.getPoint();
+    TS_Point p = ts.getPosition();
     Serial.print("Pressure = ");
     Serial.print(p.z);
     Serial.print(", x = ");

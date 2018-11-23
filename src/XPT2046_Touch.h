@@ -24,6 +24,7 @@ public:
   
 	bool begin();
 	TS_Point getPoint();
+  TS_Point getPosition();
 	bool tirqTouched();
 	bool touched();
 	void readData(uint16_t *x, uint16_t *y, uint8_t *z);

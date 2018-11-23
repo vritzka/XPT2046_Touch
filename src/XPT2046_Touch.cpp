@@ -1,5 +1,8 @@
 #include "XPT2046_Touch.h"
 
+#define DISPLAY_WIDTH 320
+#define DISPLAY_HEIGHT 240
+
 #define Z_THRESHOLD     400
 #define Z_THRESHOLD_INT	75
 #define MSEC_THRESHOLD  3
@@ -34,6 +37,12 @@ TS_Point XPT2046_Touchscreen::getPoint()
 {
 	update();
 	return TS_Point(xraw, yraw, zraw);
+}
+
+TS_Point XPT2046_Touchscreen::getPosition()
+{
+	update();
+	return TS_Point(map(xraw,0,4095,0,DISPLAY_WIDTH), map(yraw,0,4095,0,DISPLAY_HEIGHT), zraw);
 }
 
 bool XPT2046_Touchscreen::tirqTouched()
