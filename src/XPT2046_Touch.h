@@ -15,9 +15,6 @@ public:
 
 class XPT2046_Touchscreen {
   
-  int displayWidth = 0;
-int displayHeight = 0;
-  
 public:
  
   	constexpr XPT2046_Touchscreen(SPIClass &spi, int displaywidth, int displayheight, uint8_t cspin) 
@@ -43,6 +40,8 @@ public:
 private:
 	void update();
   SPIClass &xptSPI;
+  int displayWidth = 0;
+int displayHeight = 0;
 	uint8_t csPin, tirqPin, rotation=1;
 	int16_t xraw=0, yraw=0, zraw=0;
 	uint32_t msraw=0x80000000;
